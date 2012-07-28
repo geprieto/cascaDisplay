@@ -1,0 +1,3 @@
+input_files,s,a,'lc_b20120520ut041236s72330.fits',,,'list of files to be printed'
+nlines,i,h,12,0,,'number of lines to be printed from each file'
+mode,s,h,'al'
