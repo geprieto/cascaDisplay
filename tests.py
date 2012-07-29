@@ -75,16 +75,13 @@ def getStats(fits, mask):
 	maskData = getData(mask)
 	fitsHeader = getHeader(fits)
 	dataMasked = ma.array(fitsData, mask=maskData)
-	exptime = float(fitsHeader['EXPTIME'])
-	dataScaled = dataMasked / exptime
-	mean = numpy.mean(dataScaled)
-	average = numpy.average(dataScaled)
-	amin = numpy.amin(dataScaled)
-	amax = numpy.amax(dataScaled)
-	median = numpy.median(dataScaled)
-	std = numpy.std(dataScaled)
-	var = numpy.var(dataScaled)
-	return {'mean' : mean, 'average' : average, 'min' : amin, \
+	mean = numpy.mean(dataMasked)
+	amin = numpy.amin(dataMasked)
+	amax = numpy.amax(dataMasked)
+	median = numpy.median(dataMasked)
+	std = numpy.std(dataMasked)
+	var = numpy.var(dataMasked)
+	return {'mean' : mean, 'min' : amin, \
 	        'max' : amax, 'median' : median, 'std' : std, \
 	        'var' : var}	
 #print getStats('testundark.fits','fits/MASK.fits')
@@ -141,21 +138,22 @@ def createImage(fits,imagefile):
 	pixMax = (max + mean + std)/2
 	data = getData('tempundark.fits')
 	x, y = data.shape
-	img = img_scale.sqrt(data, min, pixMax)
+	img = img_scale.sqrt(data, min, max)
 	py.imshow(img, aspect='equal', cmap=plt.get_cmap('gray'))
 	py.savefig(imagefile,dpi=300)
+	#os.system("rm temp*.fits")
 
 # full moon example	
-createImage('lc_r20120604ut041627s76110.fits','fullmoon.png')
+#createImage('lc_r20120604ut041627s76110.fits','fullmoon.png')
 
 # new moon example
 createImage('lc_r20120520ut041206s72300.fits','newmoon.png')
 
 # 10% clouds, no moon example
-createImage('lc_r20120615ut072304s03540.fits','10clouds0moon.png')
+#createImage('lc_r20120615ut072304s03540.fits','10clouds0moon.png')
 
 # 70% clouds moon up example
-createImage('lc_r20120609ut071844s01860.fits','70clouds50moon.png')
+#createImage('lc_r20120609ut071844s01860.fits','70clouds50moon.png')
 	
 
 	
