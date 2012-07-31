@@ -158,10 +158,11 @@ def createImage(fits,imagefile):
 #createImage('lc_r20120609ut071844s01860.fits','70clouds50moon.png')
 
 
-#createImage('lc_r20120731ut002651s75780.fits','badtest.png')
+createImage('lc_r20120731ut002651s75780.fits','badtest.png')
 
 #mask = getData('tempmoonmask.fits')
-image = fitsimage.FitsImage('lc_r20120615ut072304s03540.fits', contrast='zscale', mask=None)
+image = fitsimage.FitsImage('lc_r20120615ut072304s03540.fits', \
+ contrast='zscale', mask=None)
 py.imshow(image, aspect='equal', cmap=plt.get_cmap('gray'))
 py.savefig('test.png',dpi=300)
 
