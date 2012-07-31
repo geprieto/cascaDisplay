@@ -1,3 +1,6 @@
+import img_scale
+import fitsimage
+
 import glob
 import pyfits
 import numpy
@@ -6,7 +9,6 @@ import numpy.ma as ma
 import scipy.stats as st
 from math import atan2, cos, sin, radians, degrees
 from pyraf import iraf
-import img_scale
 import os
 import pylab as py
 import matplotlib.pyplot as plt
@@ -147,14 +149,21 @@ def createImage(fits,imagefile):
 #createImage('lc_r20120604ut041627s76110.fits','fullmoon.png')
 
 # new moon example
-createImage('lc_r20120520ut041206s72300.fits','newmoon.png')
+#createImage('lc_r20120520ut041206s72300.fits','newmoon.png')
 
 # 10% clouds, no moon example
 #createImage('lc_r20120615ut072304s03540.fits','10clouds0moon.png')
 
 # 70% clouds moon up example
 #createImage('lc_r20120609ut071844s01860.fits','70clouds50moon.png')
-	
+
+
+#createImage('lc_r20120731ut002651s75780.fits','badtest.png')
+
+#mask = getData('tempmoonmask.fits')
+image = fitsimage.FitsImage('lc_r20120615ut072304s03540.fits', contrast='zscale', mask=None)
+py.imshow(image, aspect='equal', cmap=plt.get_cmap('gray'))
+py.savefig('test.png',dpi=300)
 
 	
 
